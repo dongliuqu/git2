@@ -10,14 +10,21 @@
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="maxActive" value="10"/>
         <property name="minIdle" value="5"/>
-    </bean> <!-- 配置sqlSessionFactory -->
+    </bean>
+    <!-- 配置sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据源 -->
         <property name="dataSource" ref="dataSource"/> <!-- mybatis总配置文件 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/> <!-- 配置实体类别名 -->
         <property name="typeAliasesPackage" value="com.pinyougou.pojo"/>
-    </bean> <!-- 扫描mapper -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    </bean>
+    <!-- 扫描mapper 替换为通用的Mapper扫描-->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.pinyougou.mapper"/>
+        <property name="properties">
+            <value>
+                mapper=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
     </bean>
 </beans>

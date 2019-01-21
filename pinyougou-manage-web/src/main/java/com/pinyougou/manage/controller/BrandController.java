@@ -16,9 +16,9 @@ public class BrandController {
     @Reference
     private BrandService brandService;
 
-    //get+requestMapping
-    @GetMapping("/findAll")
-    public List<TbBrand> findAllBrands() {
-        return brandService.findAllBrands();
+
+    @GetMapping("/testPage")
+    public List<TbBrand> queryAllBrands(Integer page, Integer rows) {
+        return (List<TbBrand>) brandService.findPage(page, rows).getDateList();
     }
 }
